@@ -39,6 +39,7 @@
 
 <div id="posts">
     <div class="postContainer">
+        <img src="img/placeholder.png"/>
         <ul>
             <li>ID</li>
             <li>Schedule</li>

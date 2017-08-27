@@ -32,10 +32,10 @@ var approved = _.filter(this.models, function(post){
 
 */
 
-    //var BookView = Backbone.View.extend({
+/*
 	var PostView = Backbone.View.extend({	
         tagName:"div",
-        className:"bookContainer",
+        className:"postContainer",
         template:$("#postTemplate").html(),
 
         render:function () {
@@ -71,5 +71,45 @@ var approved = _.filter(this.models, function(post){
     });
 
     var listView = new ListView();
+*/
 
+	var PostView = Backbone.View.extend({	
+        tagName:"div",
+        className:"postContainer",
+        template:$("#postTemplate").html(),
+
+        render:function () {
+            var tmpl = _.template(this.template); //tmpl is a function that takes a JSON object and returns html
+
+            this.$el.html(tmpl(this.model.toJSON())); //this.el is what we defined in tagName. use $el to get access to jQuery html() function
+            return this;
+        }
+    });
+
+
+ var ListView = Backbone.View.extend({
+        el:$("#posts"),
+
+        initialize:function(){
+            this.collection = new List(posts);
+            this.render();
+        },
+
+        render: function(){
+            var that = this;
+            _.each(this.collection.models, function(item){
+                that.renderPost(item);
+            }, this);
+        },
+
+        renderPost:function(item){
+            var postView = new PostView({
+                model: item
+            });
+            this.$el.append(postView.render().el);
+        }
+    });
+
+    var listView = new ListView();
+	
 })(jQuery);
