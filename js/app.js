@@ -87,14 +87,19 @@ var approved = _.filter(this.models, function(post){
     });
 
 
+
  var ListView = Backbone.View.extend({
         el:$("#posts"),
 
-        initialize:function(){
-            this.collection = new List(posts);
+        // initialize:function(){
+            // this.collection = new List(TESTDATA);
+            // this.render();
+        // },
+
+		initialize:function(){
+            this.collection = new ListItemCollection(); //(TESTDATA);
             this.render();
         },
-
         render: function(){
             var that = this;
             _.each(this.collection.models, function(item){
